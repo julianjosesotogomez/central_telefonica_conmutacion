@@ -1,13 +1,13 @@
 import pyodbc
-direccion_servidor = ''
-nombre_bd = ''
-nombre_usuario = ''
-password = ''
+direccion_servidor = 'LOCALHOST'
+nombre_bd = 'CENTRAL_TELEFONICA'
+nombre_usuario = 'sa'
+password = 'Blink3027Js'
 try:
     conexion = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' +
                               direccion_servidor+';DATABASE='+nombre_bd+';UID='+nombre_usuario+';PWD=' + password)
     # OK! conexión exitosa
-    print("Conexión exitosa a la base de datos")
+    print("OK! Conexión exitosa a la base de datos  ----> ", nombre_bd)
 except Exception as err:
     # Atrapar error
     print("Ocurrió un error al conectar a SQL Server: ", err)
