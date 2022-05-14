@@ -19,21 +19,21 @@ class CentralTelefonoefonica():
         self.abonado_ocupado = []
         self.out_servicio =[]
         
-        for i in range(0,20):
+        for i in range(0,100):
             telefono = random.randrange(8000000,9000000)
             self.usuarios.append(telefono)
 
-        for i in range(0,3):
+        for i in range(0,10):
             telefono = random.choice(self.usuarios)
             self.usuarios.remove(telefono)
             self.out_servicio.append(telefono)
 
-        for i in range(3,8):
+        for i in range(10,30):
             telefono = random.choice(self.usuarios)
             self.usuarios.remove(telefono)
             self.abonado_ocupado.append(telefono)
 
-        for i in range(8,20):
+        for i in range(30,100):
             telefono = random.choice(self.usuarios)
             self.usuarios.remove(telefono)
             self.abonado_disponible.append(telefono)
@@ -44,7 +44,7 @@ class CentralTelefonoefonica():
             while(True):
                 reproduc("./audios_conmutacion/Ingreso_abonado.mp3")
                 print('\nLos usuarios disponibles en este momento son: ')
-                for i in range(0,12):
+                for i in range(0,70):
                     print("{:^20}{:^20}".format(self.abonado_disponible[i],self.estados_llamada[0]))
                 self.abonado = int(input('Ingrese número de abonado : '))
                 self.ind1 = self.Copia.index(self.abonado)
@@ -98,19 +98,19 @@ class CentralTelefonoefonica():
         if ( self.op == 1 ):
             print("Para realizar una llamada debe escoger uno de los contactos disponibles, realice la operacion (2) en el menú")
             print("{:^20}{:^20}".format(" Número de abonado", "Estado Actual"))
-            for i in range(0,3):
+            for i in range(0,10):
                 print("{:^20}{:^20}".format(self.out_servicio[i], self.estados_llamada[2]))
-            for i in range(0,5):
+            for i in range(0,20):
                 print("{:^20}{:^20}".format(self.abonado_ocupado[i], self.estados_llamada[1]))
-            for i in range(0,11):
+            for i in range(0,69):
                 print("{:^20}{:^20}".format(self.abonado_disponible[i], self.estados_llamada[0]))
 
         if (self.op == 2): 
-            for i in range(0,3):
+            for i in range(0,10):
                 print("{:^20}{:^20}".format(self.out_servicio[i], self.estados_llamada[2]))
-            for i in range(0,5):
+            for i in range(0,20):
                 print("{:^20}{:^20}".format(self.abonado_ocupado[i], self.estados_llamada[1]))
-            for i in range(0,11):
+            for i in range(0,69):
                 print("{:^20}{:^20}".format(self.abonado_disponible[i], self.estados_llamada[0]))
             numero = int(input("Ingrese el número a llamar: "))
             if numero in self.out_servicio:

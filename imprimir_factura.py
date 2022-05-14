@@ -21,7 +21,8 @@ def imprimir(factura_abonado):
             cursor.execute(consulta_usuario_tiempo, (factura_abonado))
             time = cursor.fetchall()
             time_s=str(time)
-            time_c = re.sub("\[|\]|\,|\(|\)|\'|\'","",time_s)         
+            time_c = re.sub("\[|\]|\,|\(|\)|\'|\'","",time_s)
+                
 
             consulta_usuario_fecha = "SELECT  fecha_llamada FROM registro_llamadas WHERE id_abonado = ?;"
             cursor.execute(consulta_usuario_fecha, (factura_abonado))
