@@ -9,5 +9,3 @@ def insert(id_abonado, dataOne, dataTwo, dataThree):
             print("Llamada registrada correctamente! -> Origen: ",dataOne, " Destino: ", dataTwo, " Tiempo: ",  dataThree, " Fecha: ", datetime.now())
     except Exception as err:
         print("Error! Ocurrio un error en el ingreso de los datos ", err)
-    finally:
-        conexion.close()

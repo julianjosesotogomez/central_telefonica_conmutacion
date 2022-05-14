@@ -8,8 +8,6 @@ def get(data):
             datos = cursor.fetchall()
             for i in datos:
                 print("Registro llamada ---> ",i)
-            return i
+            return datos
     except Exception as err:
         print("Ocurrió un error al consultar con where: ", err)
-    finally:
-        conexion.close()

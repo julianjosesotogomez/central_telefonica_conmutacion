@@ -1,3 +1,4 @@
+from msilib.schema import Error
 import time
 import pygame
 import random
@@ -39,18 +40,21 @@ class CentralTelefonoefonica():
         
         self.Copia = self.abonado_disponible.copy()
 
-        while(True):
-            reproduc("./audios_conmutacion/Ingreso_abonado.mp3")
-            print('\nLos usuarios disponibles en este momento son: ')
-            for i in range(0,12):
-                print("{:^20}{:^20}".format(self.abonado_disponible[i],self.estados_llamada[0]))
-            self.abonado = int(input('Ingrese número de abonado : '))
-            self.ind1 = self.Copia.index(self.abonado)
-            if self.abonado in self.abonado_disponible:
-                self.abonado_disponible.remove(self.abonado)
-                break
-            else:
-                reproduc("./audios_conmutacion/Sin_registrar.mp3")
+        try:
+            while(True):
+                reproduc("./audios_conmutacion/Ingreso_abonado.mp3")
+                print('\nLos usuarios disponibles en este momento son: ')
+                for i in range(0,12):
+                    print("{:^20}{:^20}".format(self.abonado_disponible[i],self.estados_llamada[0]))
+                self.abonado = int(input('Ingrese número de abonado : '))
+                self.ind1 = self.Copia.index(self.abonado)
+                if self.abonado in self.abonado_disponible:
+                    self.abonado_disponible.remove(self.abonado)
+                    break
+        except Exception as err:
+            print("Ha sucedido un error con el ingreso del abonado! ----> ", err)
+            reproduc("./audios_conmutacion/Sin_registrar.mp3")
+            CentralTelefonoefonica()
                 
         while(True):
             CentralTelefonoefonica.menu(self)
@@ -64,11 +68,6 @@ class CentralTelefonoefonica():
             else:
                 reproduc("./audios_conmutacion/Op_invalida.mp3")
                
-    
-    """
-    MENÚ
-
-    """
 
     def menu(self):
         self.menu="""
@@ -77,8 +76,8 @@ class CentralTelefonoefonica():
 
         Opciones de Menú :
 
-        Llamar                    ( 1 )
-        Contactos                 ( 2 )
+        Contactos                 ( 1 )
+        Llamar                    ( 2 )
         Registros de llamadas     ( 3 )
         Realizar facturación      ( 4 )
 
@@ -97,6 +96,7 @@ class CentralTelefonoefonica():
             print("La opción de Menú no es correcta.")
             self.op=int(input(self.menu))
         if ( self.op == 1 ):
+            print("Para realizar una llamada debe escoger uno de los contactos disponibles, realice la operacion (2) en el menú")
             print("{:^20}{:^20}".format(" Número de abonado", "Estado Actual"))
             for i in range(0,3):
                 print("{:^20}{:^20}".format(self.out_servicio[i], self.estados_llamada[2]))
@@ -142,6 +142,7 @@ class CentralTelefonoefonica():
         if (self.op == 4):
             factura_abonado=str(input("Ingrese los tres primeros digitos del numero del abonado al cual desea realizar la factura: "))
             imprimir(factura_abonado)
+            print("------------> ¡Factura realizada! <-------------")
            
 random.seed(0)
 pygame.init()
