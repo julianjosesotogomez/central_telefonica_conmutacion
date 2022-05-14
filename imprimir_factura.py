@@ -28,7 +28,13 @@ def imprimir(factura_abonado):
             cursor.execute(consulta_usuario_fecha, (factura_abonado))
             fecha = cursor.fetchall()
             fecha_s=str(fecha)
-            fecha_c = re.sub("\[|\]|\,|\(|\)|\'|\'","",fecha_s) 
+            fecha_c = re.sub("\[|\]|\,|\(|\)|\'|\'","",fecha_s)
+
+            consulta_usuario_saldo = "SELECT (SUM(duracion_llamada)*3600)+(SUM(duracion_llamada)*60) FROM registro_llamadas WHERE id_abonado=?;"
+            cursor.execute(consulta_usuario_saldo, (factura_abonado))
+            saldo=cursor.fetchone()
+            saldo_s=str(saldo)
+            saldo_c=re.sub("\[|\]|\,|\(|\)|\'|\'","",saldo_s) 
 
             factura=open("C:/Users/julia/OneDrive/Documentos/DocumentosPersonales/Archivos Universitarios/2022-1/Conmutacion\central_telefonica/facturas/factura.txt",'w')
             factura.write('\t'*4 + 'FACTURA ELECTRONICA CON REGISTROS ' + os.linesep)
@@ -39,6 +45,8 @@ def imprimir(factura_abonado):
             factura.write('\t' + str(time_c) +  os.linesep)
             factura.write('\t' + 'FECHA LLAMADA'+ os.linesep)
             factura.write('\t' + str(fecha_c) +  os.linesep)
+            factura.write('\t' + 'SALDO LLAMADA:'+ os.linesep)
+            factura.write('\t' + str(saldo_c) +  os.linesep)
             factura.close()
     except Exception as err:
         print("Ocurrió un error al construir la factura: ", err)
